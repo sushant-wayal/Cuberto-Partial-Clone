@@ -64,12 +64,12 @@ const makeMagnetic = (ele,mf1) => {
                 duration: 0.2,
             })
         }
-        let d = (delx**2+dely**2)**(1/2);
+        let totalAngle = 0;
         if (Math.abs(delx) <= r && Math.abs(dely) <= r && !going) {
             const angle = Math.atan2(dely,delx)*(180/Math.PI);
+            totalAngle += angle;
             document.removeEventListener("mousemove",mfMove);
             gsap.to(ele,{
-                // y: ((delx**2+dely**2)**(1/2))/10,
                 x: delx/10,
                 y: dely/10,
             })
@@ -87,45 +87,41 @@ const makeMagnetic = (ele,mf1) => {
         }
         else {
             if (!going) {
+                gsap.to(mf,{
+                    rotate: -1*totalAngle,
+                });
                 let tl = gsap.timeline();
                 tl.to(ele,{
-                    // y: -d/30, 
                     x: -delx/30,
                     y: -dely/30,
                     duration: 0.25,
                 })
                 tl.to(ele,{
-                    // y: +d/40,
                     x: +delx/40,
                     y: +dely/40,
                     duration: 0.1875, 
                 })
                 tl.to(ele,{
-                    // y: -d/40, 
                     x: -delx/40,
                     y: -dely/40,
                     duration: 0.1875,
                 })
-                tl.to(ele,{
-                    // y: +d/50, 
+                tl.to(ele,{ 
                     x: +delx/50,
                     y: +dely/50,
                     duration: 0.125,
                 })
-                tl.to(ele,{
-                    // y: -d/50, 
+                tl.to(ele,{ 
                     x: -delx/50,
                     y: -dely/50,
                     duration: 0.125,
                 })
-                tl.to(ele,{
-                    // y: +d/60, 
+                tl.to(ele,{ 
                     x: +delx/60,
                     y: +dely/60,
                     duration: 0.125,
                 })
-                tl.to(ele,{
-                    // y: -d/60, 
+                tl.to(ele,{ 
                     x: -delx/60,
                     y: -dely/60,
                     duration: 0.125,
@@ -147,16 +143,6 @@ const makeMagnetic = (ele,mf1) => {
 
 function createMouseFollower() {
     let mf = document.createElement("div");
-    // mf.style.borderRadius = "50%";
-    // mf.style.height = "10px";
-    // mf.style.width = "10px";
-    // mf.style.backgroundColor = "#000000";
-    // mf.style.position = "fixed";
-    // mf.style.zIndex = "-1";
-    // mf.style.overflow = "hidden";
-    // mf.style.animation = "birth 0.4s linear 0s 1 normal"
-    // mf.style.mixBlendMode = "difference";
-    // mf.style.cursor = "none";
     mf.classList.add("mouseFollower")
     document.body.append(mf);
     return mf;
@@ -173,7 +159,6 @@ const mfMove = (evt) => {
         makeMagnetic(menuicon,mf);
     }
     gsap.to(mf,{
-        // zIndex: -1,
         x: evt.clientX-kx,
         y: evt.clientY-ky,
         height: 10,
@@ -416,10 +401,8 @@ const mfColorChange = () => {
         mf.style.zIndex = 1;
         let posY = mfRect.top - proRect.top;
         let i = Math.ceil(posY/(projects.offsetHeight/6));
-        // let str = `rgb(${255-Math.round(avgColors[i-1][0])},${255-Math.round(avgColors[i-1][1])},${255-Math.round(avgColors[i-1][2])})`;
         mf.style.backgroundColor = `rgb(${255-avgColors[i-1][0]},${255-avgColors[i-1][1]},${255-avgColors[i-1][2]})`;
-        // console.log(str,i);
-        // mf.style.backgroundColor = str;
+
     }
     else {
         mf.style.zIndex = -1;
@@ -430,53 +413,42 @@ const mfColorChange = () => {
 document.addEventListener("mousemove",mfColorChange);
 document.addEventListener("scroll",mfColorChange);
 
-// for (let i = 0; i < noOfImages; i++) {
-//     console.log(avgColors[i][0],avgColors[i][1],avgColors[i][2]);
-// }
+document.addEventListener("mousemove", (evt)=> {
+    let imgsRect = imgs.getBoundingClientRect();
+    if (evt.x > imgsRect.left && evt.x < imgsRect.right && evt.y > imgsRect.top && evt.y < imgsRect.bottom) {
+        document.removeEventListener("mousemove",mfMove);
+        mf.innerHTML = "<p> Explore </p> <p> Now </p>";
+        gsap.to(mf,{
+            x: evt.clientX-kx-50,
+            y: evt.clientY-ky-50,
+            height: 100,
+            width: 100,
+            duration: 0.3,
+        })
+    }
+    else {
+        if (mf.children.length == 2) {
+            mf.innerHTML = "";
+        }
+        document.addEventListener("mousemove",mfMove);
+    }
+})
 
-// document.addEventListener("mousemove", (evt) => {
-//     let proRect = projects.getBoundingClientRect();
-//     let mfRect =  mf.getBoundingClientRect();
-//     if (mfRect.top > proRect.top && mfRect.bottom < proRect.bottom) {
-//         document.removeEventListener("mousemove",mfMove);
-//         mf.style.zIndex = 3;
-//         mf.style.cursor = "none";
-//         let posY = mfRect.top - proRect.top;
-//         let i = Math.ceil(posY/(projects.offsetHeight/6));
-//         mf.style.backgroundColor = mfColor[i-1];
-//         gsap.to(mf,{
-//             x: evt.clientX-kx,
-//             y: evt.clientY-ky,
-//             duration: 0.4,
-//         })
-//     }
-//     else {
-//         mf.style.zIndex = -1;
-//         mf.addEventListener("mousemove",mfMove);
-//     }
-// })
-
-// let onImage = false;
-
-// imgs.addEventListener("mousemove", () => {
-//     // kx -= 25;
-//     // ky -= 25;
-//     onImage = true;
-//     gsap.to(mf,{
-//         height: 80,
-//         width: 80,
-//         duration: 0.4,
-//     })
-// })
-// imgs.addEventListener("mouseout", () => {
-//     // kx += 25;
-//     // ky += 25;
-//     onImage = false;
-//     gsap.to(mf,{
-//         height: 10,
-//         width: 10,
-//         duration: 0.4,
-//     })
-// })
+document.addEventListener("scroll", ()=> {
+    let imgsRect = imgs.getBoundingClientRect();
+    let mfRect = mf.getBoundingClientRect();
+    const mfCenterX = (mfRect.left+mfRect.right)/2;
+    const mfCenterY = (mfRect.top+mfRect.bottom)/2;
+    if (!(mfCenterX > imgsRect.left && mfCenterX < imgsRect.right && mfCenterY > imgsRect.top && mfCenterY < imgsRect.bottom)) {
+        if (mf.children.length == 2) {
+            mf.innerHTML = "";
+        }
+        gsap.to(mf,{
+            height: 10,
+            width: 10,
+            duration: 0.3,
+        })
+    }
+})
 
 // Image Effect Code Ends

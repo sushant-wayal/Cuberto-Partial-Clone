@@ -340,7 +340,7 @@ for (let i = 1; i <= noOfImages; i++) {
     const frequency = 0.02;
     let time = 0;
     let im = new Image();
-    im.src = `images/projectimg/img${i}.jpg`;
+    im.src = `images/projectimg/img${i}.webp`;
     let avgColor = [0, 0, 0, 0];
     document.addEventListener("scroll", () => {
         if (canvas.getBoundingClientRect().top <= imgs.getBoundingClientRect().top) {

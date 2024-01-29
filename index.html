@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuberto Partial Clone</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="navbar">
+        <div id="logo">
+            <h1 id="logotext">
+                cuberto
+            </h1>
+        </div>
+        <div id="options">
+            <div id="option1">
+                <p id="'option1text">
+                    our showreel
+                </p>
+            </div>
+            <div id="option2">
+                <p id="option2text">
+                    menu
+                </p>
+                <img id="menuicon" src="images/menuimgblack.png" alt="">
+            </div>
+        </div>
+    </div>
+    <div id="services">
+        <div id="tagline">
+            <h3 id="taglinetext"> We make it happen </h3>
+        </div>
+        <div id="servicesname">
+            <div id="websites">
+                <h2 id="websitestext"> Websites </h2>
+            </div>
+            <div id="apps">
+                <h2 id="appstext"> Apps </h2>
+            </div>
+            <div id="branding">
+                <h2 id="brandingtext"> Branding </h2>
+            </div>
+        </div>
+    </div>
+    <div id="description">
+        <p id="descriptiontext">
+            Leading Digital agency with solid design and development expertise. We build readymade websites, mobile applications, and elaborate online business services.
+        </p>
+    </div>
+    <div id="featuredprojects">
+        <p id="featured"> featured </p>
+        <p id="projects"> projects </p>
+    </div>
+    <div id="projectdescription">
+        <div id="textdescription">
+            <div id="project1" class="project">
+                <p id="title1" class="title">uLesson</p>
+                <p id="maininfo1" class="maininfo">Online platform for distance learning</p>
+                <p id="tags1" class="tags">web, mobile, product</p>
+            </div>
+            <div id="project2" class="project">
+                <p id="title2" class="title">Ferrumpipe</p>
+                <p id="maininfo2" class="maininfo">Galvanized steel metal frame manufacturer</p>
+                <p id="tags2" class="tags">branding, design, development, product</p>
+            </div>
+            <div id="project3" class="project">
+                <p id="title3" class="title">Riyadh</p>
+                <p id="maininfo3" class="maininfo">Official website of Riyadh, Saudi Arabia's capital</p>
+                <p id="tags3" class="tags">design, development, product</p>
+            </div>
+            <div id="project4" class="project">
+                <p id="title4" class="title">FlipaClip</p>
+                <p id="maininfo4" class="maininfo">The best tool for frame-by-frame animation</p>
+                <p id="tags4" class="tags">web, development, product</p>
+            </div>
+            <div id="project5" class="project">
+                <p id="title5" class="title">Sleepiest</p>
+                <p id="maininfo5" class="maininfo">Sleep app helps millions fall asleep every night</p>
+                <p id="tags5" class="tags">branding, design, mobile, product</p>
+            </div>
+            <div id="project6" class="project">
+                <p id="title6" class="title">Nana Asia</p>
+                <p id="maininfo6" class="maininfo">Asia's digital magazine, powered by women</p>
+                <p id="tags6" class="tags">web, design, development</p>
+            </div>
+        </div>
+        <div id="imgdescription">
+            <canvas id="img1" class="imgs"></canvas>
+            <canvas id="img2" class="imgs"></canvas>
+            <canvas id="img3" class="imgs"></canvas>
+            <canvas id="img4" class="imgs"></canvas>
+            <canvas id="img5" class="imgs"></canvas>
+            <canvas id="img6" class="imgs"></canvas>
+        </div>
+    </div>
+    <script src="https://unpkg.com/gsap@3.9.0/dist/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js" integrity="sha512-EZI2cBcGPnmR89wTgVnN3602Yyi7muWo8y1B3a8WmIv1J9tYG+udH4LvmYjLiGp37yHB7FfaPBo8ly178m9g4Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #waveCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: 10px; /* Set the border radius to make the corners rounded */
+        }
+    </style>
+</head>
+<body>
+    <canvas id="waveCanvas"></canvas>
+
+    <script>
+        const canvas = document.getElementById('waveCanvas');
+        const ctx = canvas.getContext('2d');
+        const waveHeight = 20;
+        const waveSpeed = 0.02;
+        const amplitude = 15; // Maximum random amplitude
+        const frequency = 0.05; // Frequency of random changes
+        let time = 0;
+
+        function drawWave() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            ctx.beginPath();
+            ctx.moveTo(0, canvas.height / 2);
+
+            for (let i = 0; i < canvas.width; i++) {
+                const randomOffset = amplitude * Math.sin(frequency * i);
+                const y = waveHeight * Math.sin(waveSpeed * i + time) + canvas.height / 2 + randomOffset;
+                ctx.lineTo(i, y);
+            }
+
+            ctx.lineTo(canvas.width, canvas.height);
+            ctx.lineTo(0, canvas.height);
+            ctx.closePath();
+
+            ctx.fillStyle = '#3498db'; // Wave color
+            ctx.fill();
+
+            time += 0.02;
+
+            requestAnimationFrame(drawWave);
+        }
+
+        drawWave();
+    </script>
+</body>
+</html> -->

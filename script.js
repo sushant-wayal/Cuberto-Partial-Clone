@@ -82,7 +82,7 @@ const makeMagnetic = (ele,mf1) => {
                 rotation: angle,
                 duration: 0.2,
             })
-            ele.src = "images/menuimgwhite.png";
+            ele.src = "images/menuimgwhite.webp";
             ele.style.color = "white";
         }
         else {
@@ -135,7 +135,7 @@ const makeMagnetic = (ele,mf1) => {
             if (!(Math.abs(delx) <= r && Math.abs(dely) <= r)) {
                 document.addEventListener("mousemove",mfMove);
             }
-            ele.src = "images/menuimgblack.png";
+            ele.src = "images/menuimgblack.webp";
             ele.style.color = "black";
         }
     })
